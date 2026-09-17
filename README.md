@@ -1,152 +1,120 @@
-# 远桥 · Yuanqiao Relay
+# 远桥 · FarBridge Relay
 
-> 让重要的短信与通话记录，跨设备抵达你手上。
+> 让重要的短信与通话记录，跨设备抵达你手上。<br>
+> Keep important SMS and call records available across your devices.
 
-远桥（Yuanqiao Relay）是一个中文优先、可自托管的“安卓采集端 → 中继服务 → iPhone Safari/PWA”项目。安卓手机负责读取并上送短信与通话事件；服务端负责认证、去重、加密设置、短期保留和通知；iPhone 通过 Safari 或添加到主屏幕的 PWA 查看最新记录。
+远桥（**FarBridge Relay**）是一个可自托管的 Android → Relay Server → iPhone Safari/PWA 通信镜像项目。Android 端负责读取并安全提交短信、通话事件；中继服务负责认证、去重、短期保留和通知；iPhone 端通过 Safari 或“添加到主屏幕”的 PWA 查看最新记录。
 
-![远桥架构示意图](docs/assets/relay-overview.png)
+**FarBridge Relay** is a self-hosted Android → relay server → iPhone Safari/PWA mirror. The Android client submits SMS and call events, the relay authenticates and deduplicates them, and the iPhone client displays the newest records with optional Web Push or Bark notifications.
 
-> 本仓库是可审计的脱敏源码副本。它不包含任何真实域名、IP、账号、密码、设备密钥、Bark key、推送私钥、数据库、日志、APK 或个人信息。
+![远桥 / FarBridge Relay 架构示意图](docs/assets/relay-overview.png)
 
-## 1.0.9 版本预览
+> **脱敏边界 / Sanitization boundary**<br>
+> 本仓库是可审计的公开源码副本，不包含真实域名、IP、账号、密码、设备密钥、Bark key、VAPID 私钥、数据库、日志、APK 或个人信息。线上 \`/data/phone-mirror\` 与本仓库完全隔离。<br>
+> This repository is a sanitized, auditable source copy. It contains no production URL, IP, credential, device key, Bark key, VAPID private key, database, log, APK, or personal data. The live \`/data/phone-mirror\` deployment is completely separate.
 
-下面两张图是与当前 Android `1.0.9` 设计对齐的脱敏 UI 预览，不是某个用户的真实设备截图，也不包含真实域名、账号、号码、验证码或密钥。预览重点展示：iPhone 端最新消息置顶、单条消息展开、收藏/置顶状态，以及 Android 端密码显示按钮和同步状态。
+## 1.0.9 UI preview / 界面预览
 
-<table>
-  <tr>
-    <td width="50%"><img src="docs/assets/iphone-ui-preview.png" alt="iPhone 端远桥短信列表 UI 预览" width="100%"><br><sub>iPhone / Safari PWA：消息展开、收藏、置顶、刷新</sub></td>
-    <td width="50%"><img src="docs/assets/android-ui-preview.png" alt="Android 端远桥同步设置 UI 预览" width="100%"><br><sub>Android 1.0.9：服务器、设备密钥、权限与同步状态</sub></td>
-  </tr>
-</table>
+![iPhone / Safari PWA 消息页预览](docs/assets/iphone-ui-preview.png)
 
-## 功能
+<p><sub>iPhone / Safari PWA：最新消息优先、单条短信展开、收藏、置顶与刷新。图中内容为虚构脱敏数据；页面外部没有四角方框，也不是某台真实手机的截图。<br>iPhone / Safari PWA: newest-first messages, expandable SMS, favorites, pinning, and refresh. Fictional sanitized data only; the preview is a rounded page panel without a square outer frame.</sub></p>
 
-- 安卓短信、通话事件同步到自托管服务。
-- 服务端按事件 ID 去重，断网时由安卓端排队，恢复网络后继续提交。
-- iPhone 端消息与电话分栏，最新内容优先；单条短信可展开查看完整原文。
-- iPhone 端支持收藏、置顶和列表删除；收藏内容由用户主动删除前保留。
-- 可选 Web Push 与 Bark 提醒；默认采用隐私模式，锁屏只提示收到新消息/验证码。
-- 设备状态、同步失败、权限状态和服务健康检查可审计。
-- 配置、数据库、日志和密钥与源码分离，适合个人或小范围自托管。
+## 项目身份 / Project identity
 
-## 目录
+| 用途 | 中文 ID | English ID |
+| --- | --- | --- |
+| 产品名称 / Product | 远桥 | FarBridge Relay |
+| GitHub 仓库 slug | \`yuanqiao-relay\` | \`yuanqiao-relay\` |
+| Android 应用显示名 | 远桥采集端 | FarBridge Agent |
+| iPhone PWA 显示名 | 远桥消息 | FarBridge Inbox |
 
-- `android/`：Android 采集端源码，当前版本 `1.0.9`。
-- `server/`：API、认证、同步、消息/通话镜像及保留策略。
-- `web/`：iPhone Safari/PWA 前端。
-- `contracts/`：客户端与服务端共享的接口契约和 fixture。
-- `deploy/`：部署模板；真实配置只能由操作者在目标环境创建。
-- `docs/`：架构、安全、测试、恢复与发布边界说明。
+仓库 slug 为了保持 URL 稳定仍使用 \`yuanqiao-relay\`；产品展示、应用标题和文档同时使用“远桥 / FarBridge Relay”。
 
-## 快速开始
+The repository slug remains \`yuanqiao-relay\` for URL stability. Product-facing names use both **远桥** and **FarBridge Relay**.
 
-### 1. 获取源码
+## 功能 / Features
 
-```bash
-git clone https://github.com/<your-account>/yuanqiao-relay.git
-cd yuanqiao-relay
-```
+- Android SMS and call events are queued locally when offline and retried after connectivity returns.
+- Server-side event IDs provide deduplication; authentication, retention, and device state are auditable.
+- iPhone messages and calls are separated, newest first; a message can be expanded to reveal its full original text.
+- iPhone list actions include favorite, pin, copy, refresh, and list-only deletion. Server retention is bounded; favorited items require explicit operator deletion in the UI.
+- Optional Web Push and Bark notifications. Privacy mode can suppress SMS bodies on lock-screen notifications.
+- Secrets, databases, logs, and deployment configuration stay outside the public source tree.
 
-仓库建议使用 `yuanqiao-relay` 作为 slug；账号、可见性和域名由仓库所有者自行决定。
+## GitHub Releases / 发布下载
 
-### 2. 生成服务端配置
+下载入口：**[Releases](https://github.com/Apageoflove/yuanqiao-relay/releases)**
 
-复制模板，只在目标服务器的受控目录填写真实值：
+- **Android / 安卓：** 从 Release 下载 \`farbridge-relay-android-v1.0.9.apk\`，或用自己的 keystore 构建；覆盖升级必须保留同一套 keystore。
+- **iPhone / iOS：** 本项目不伪造 IPA。iOS 客户端是 Safari/PWA：打开自己的 HTTPS 地址，登录后“分享 → 添加到主屏幕”。Release 提供 \`farbridge-relay-ios-safari-setup.md\` 离线说明。
+- **Checksums / 校验：** Release 的 \`SHA256SUMS.txt\` 用于核对 APK 完整性。
 
-```bash
+- **Android:** Download \`farbridge-relay-android-v1.0.9.apk\` from Releases, or build it with your own keystore. Keep that keystore for in-place upgrades.
+- **iPhone/iOS:** There is intentionally no fabricated IPA. Open your HTTPS URL in Safari, sign in, then choose **Share → Add to Home Screen**. The Release includes \`farbridge-relay-ios-safari-setup.md\`.
+- **Checksums:** Use \`SHA256SUMS.txt\` to verify the APK.
+
+## iPhone Safari/PWA setup / iPhone 使用步骤
+
+1. 用自己的 HTTPS 地址替换 \`<YOUR_HTTPS_URL>\` 并在 Safari 打开；不要公开真实地址。 / Replace \`<YOUR_HTTPS_URL>\` with your HTTPS endpoint and keep the real URL private.
+2. 使用目标服务器生成的管理员账号登录，不要使用仓库示例值。 / Sign in with credentials generated in your target environment, not repository examples.
+3. Safari“分享”→“添加到主屏幕”，从图标启动；iOS Web Push 通常必须通过 HTTPS 与主屏幕 PWA。 / Use **Share → Add to Home Screen**; iOS Web Push requires HTTPS and should be enabled from the installed PWA.
+4. 在“设置 → Web Push”开启，并在 iOS 通知设置中允许“远桥消息 / FarBridge Inbox”的提醒、声音、标记。 / Enable **Settings → Web Push**, then allow alerts, sounds, and badges for the app.
+5. 可选 Bark：在 Bark App 复制设备码/完整地址，填入项目“设置 → Bark”，保存后发送测试；建议保持隐私模式。 / Optional Bark: copy its device code/full URL into **Settings → Bark**, save, and send a test; keep privacy mode enabled.
+6. 页面不刷新时下拉刷新；若 Service Worker 过旧，删除主屏幕图标、清 Safari 网站数据，再重新添加。 / If refresh is stale, remove the icon, clear Safari website data, and add the PWA again.
+
+## 自己生成密钥 / Generate your own keys
+
+所有结果只写入目标服务器的 \`deploy/secrets.env\` 或密码管理器，不提交 GitHub。 / Store all outputs only in controlled \`deploy/secrets.env\` or a password manager; never commit them.
+
+### 管理员密码哈希 / Admin password hash
+
+\`\`\`bash
 cp deploy/env.example deploy/secrets.env
 chmod 600 deploy/secrets.env
-```
-
-使用项目脚本生成基础随机值和 Argon2id 管理员密码哈希。密码通过临时环境变量传入，不要把密码写进命令行历史：
-
-```bash
 python -m pip install -e './server' -i https://pypi.tuna.tsinghua.edu.cn/simple
 read -r -s PHONE_MIRROR_ADMIN_PASSWORD
 export PHONE_MIRROR_ADMIN_PASSWORD
 python tools/generate_secrets.py
 unset PHONE_MIRROR_ADMIN_PASSWORD
-```
+\`\`\`
 
-将命令输出中的 `ENCRYPTION_KEY`、`SESSION_SECRET`、`ADMIN_PASSWORD_HASH` 和设备随机值写入目标环境的 `deploy/secrets.env`。`DEVICE_SECRETS_JSON` 中的设备 ID 与 Android 端保持一致，设备密钥至少 32 个随机字符。不要把填好后的 `secrets.env` 提交到 GitHub。
+把输出的 Argon2id \`ADMIN_PASSWORD_HASH\` 写入受控配置；不要把明文密码写入 shell 历史。 / Store the generated Argon2id hash in controlled config; never place plaintext passwords in shell history.
 
-### 3. 自己生成 Android APK 签名
+### 设备密钥、Android 签名、VAPID、Bark / Device, signing, VAPID and Bark keys
 
-公开仓库不附带任何人的签名私钥。首次发布时在本地生成自己的 keystore，并将密码放在密码管理器中：
-
-```bash
+\`\`\`bash
+python -c "import secrets; print(secrets.token_urlsafe(48))"
 mkdir -p android/keystore
-keytool -genkeypair -v \
-  -keystore android/keystore/release.keystore \
-  -alias yuanqiao-relay -keyalg RSA -keysize 2048 -validity 10950
-```
-
-在 `android/keystore/keystore.properties` 填入本机值（文件已被 Git 忽略）：
-
-```properties
-storeFile=release.keystore
-storePassword=<your-keystore-password>
-keyAlias=yuanqiao-relay
-keyPassword=<your-key-password>
-```
-
-构建并安装：
-
-```bash
-cd android
-gradle testDebugUnitTest
-gradle assembleRelease
-```
-
-APK 位于 `android/app/build/outputs/apk/release/`。每个使用者都应使用自己的签名；更换签名会影响 Android 覆盖升级，请保留自己的 keystore 备份，但绝不上传它。
-
-仓库不携带 Gradle Wrapper；本机构建机请安装与 Android Gradle Plugin 8.9.1 兼容的 Gradle 发行版，并先运行 `gradle --version` 确认环境。
-
-### 4. 自己生成 Safari Web Push 密钥
-
-Safari/PWA 的推送密钥是服务端的 VAPID 公钥与私钥，不是项目作者提供的固定密码。目标服务器或独立密钥环境中安装 `py-vapid` 后生成：
-
-```bash
+keytool -genkeypair -v -keystore android/keystore/release.keystore -alias farbridge-relay -keyalg RSA -keysize 2048 -validity 10950
 python -m pip install py-vapid -i https://pypi.tuna.tsinghua.edu.cn/simple
 vapid --gen
 vapid --applicationServerKey
-```
+\`\`\`
 
-把生成结果分别填到 `VAPID_PRIVATE_KEY`、`VAPID_PUBLIC_KEY`，并设置唯一的 `VAPID_SUBJECT`（例如 `mailto:operator@example.invalid`）。私钥只放在受控的 `secrets.env`；公钥可由已登录的 PWA 配置使用。iPhone 必须通过 HTTPS 打开站点，并从 Safari 添加到主屏幕后再启用 Web Push。
+为每台设备生成不同的随机设备密钥（至少 32 个随机字符），让服务端 \`DEVICE_SECRETS_JSON\` 与 Android 完全一致；VAPID 私钥只留在服务端；Bark key 从 Bark App 复制并保持 \`BARK_PRIVACY_MODE=true\`。/ Generate a different device secret (at least 32 random characters) per device, keep \`DEVICE_SECRETS_JSON\` identical on server and Android, store VAPID private keys server-side only, and copy Bark keys from the Bark app with privacy mode enabled.
 
-### 5. 可选 Bark
+## 本地构建 / Build locally
 
-在 Bark App 中复制自己的设备码或完整地址，只填写到目标环境的 `BARK_KEY`，并设置 `BARK_ENABLED=true`。Bark key 不由本项目生成，不能写入 README、截图、Issue、日志或 Git 历史。建议保持 `BARK_PRIVACY_MODE=true`，避免验证码出现在锁屏通知中。
+\`\`\`bash
+git clone https://github.com/Apageoflove/yuanqiao-relay.git
+cd yuanqiao-relay
+cd android
+gradle testDebugUnitTest
+gradle assembleRelease
+\`\`\`
 
-## 构建与验证
+服务端测试：\`python -m pip install -e './server[test]' -i https://pypi.tuna.tsinghua.edu.cn/simple && cd server && python -m pytest -q\`。布局检查：\`bash scripts/verify-layout.sh\`。仓库不携带 Gradle Wrapper，请使用与 Android Gradle Plugin 8.9.1 兼容的 Gradle。
 
-服务端本地检查：
+See \`web/package.json\` for PWA commands. Read [architecture](docs/ARCHITECTURE.md), [Android permissions](docs/ANDROID_PERMISSIONS.md), [iPhone setup](docs/IPHONE_SETUP.md), [acceptance](docs/ACCEPTANCE.md), [security](docs/SECURITY.md), and [release safety](docs/RELEASE_SAFETY.md) before production use.
 
-```bash
-python -m pip install -e './server[test]' -i https://pypi.tuna.tsinghua.edu.cn/simple
-cd server
-python -m pytest -q
-cd ..
-bash scripts/verify-layout.sh
-```
+## 生产边界 / Production boundary
 
-前端依赖与构建命令见 `web/package.json`；Android 单元测试与 release 构建见上文。发布前请完整阅读：
+- GitHub is a sanitized source/release distribution, not a backup of live SMS, calls, databases, or secrets.
+- Publishing must not modify \`/data/phone-mirror\`, containers, reverse-proxy configuration, or unrelated services.
+- Back up, health-check, stage, smoke-test, and keep a rollback version before production changes; never run an unreviewed \`git pull\` in a live deployment.
+- SMS and verification codes are sensitive. Redact bodies, phone numbers, device IDs, tokens, and URLs before sharing screenshots or logs.
 
-- [架构说明](docs/ARCHITECTURE.md)
-- [iPhone 设置](docs/IPHONE_SETUP.md)
-- [Android 权限](docs/ANDROID_PERMISSIONS.md)
-- [验收清单](docs/ACCEPTANCE.md)
-- [安全边界](docs/SECURITY.md)
-- [发布安全说明](docs/RELEASE_SAFETY.md)
+## 许可证 / License
 
-## 生产安全边界
-
-- GitHub 仓库是脱敏源码副本，不是线上数据备份。
-- GitHub 发布、下载、查看或构建不会修改任何线上 `/data/phone-mirror` 文件、数据库、容器、反向代理或其他项目。
-- 真实域名、IP、账号、密码、设备密钥、Bark key、VAPID 私钥、数据库、日志、APK 和 keystore 都必须留在使用者自己的目标环境。
-- 短信和验证码属于敏感信息。分享截图、Issue 或日志前，必须去除正文、号码、验证码、设备标识和访问令牌。
-- 生产变更前先备份、健康检查、灰度验证并保留回滚版本；不要直接在运行中的服务器执行未经审阅的 `git pull`。
-
-## 许可证
-
-本仓库当前未预置许可证。公开发布前，请仓库所有者补充适合自己的许可证和第三方依赖声明。
+本仓库当前未预置许可证；公开使用前请补充许可证和第三方依赖声明。<br>
+No license is bundled yet; add a license and third-party notices before public redistribution.
