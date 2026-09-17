@@ -49,7 +49,7 @@ Keep real keys only in the target server's deploy/secrets.env or a password mana
 - Safari Web Push: install py-vapid, then run vapid --gen and vapid --applicationServerKey.
 - Bark: copy the device code or full URL from your own Bark app.
 
-Read [Architecture](docs/ARCHITECTURE.md), [Android permissions](docs/ANDROID_PERMISSIONS.md), [iPhone setup](docs/IPHONE_SETUP.md), [Acceptance checklist](docs/ACCEPTANCE.md), and [Security and release boundary](docs/RELEASE_SAFETY.md) before production use.
+Read [Architecture](docs/ARCHITECTURE.md), [Android permissions](docs/ANDROID_PERMISSIONS.md), [iPhone setup](docs/IPHONE_SETUP.md), the detailed [operator guide (Chinese)](docs/OPERATOR_GUIDE.zh-CN.md), [Acceptance checklist](docs/ACCEPTANCE.md), and [Security and release boundary](docs/RELEASE_SAFETY.md) before production use.
 
 ## Build locally
 
