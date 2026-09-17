@@ -1,0 +1,12 @@
+# Standalone template only. Operator chooses a real hostname and imports it after snapshot+validation.
+phone.example.invalid {
+    encode zstd gzip
+    reverse_proxy 172.17.0.1:8084 {
+        flush_interval -1
+    }
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+    }
+}

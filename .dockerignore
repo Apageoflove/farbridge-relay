@@ -1,0 +1,10 @@
+**
+!server/
+!server/app/
+!server/alembic/
+!server/alembic.ini
+!server/pyproject.toml
+!web/
+!web/dist/
+!web/dist/**
+server/**/__pycache__/

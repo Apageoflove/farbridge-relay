@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 远桥自适应图标前景：母版几何按中心缩放至系统安全区。 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+    <group
+        android:pivotX="512"
+        android:pivotY="512"
+        android:scaleX="0.72"
+        android:scaleY="0.72">
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M176,676 C244,478 350,366 458,344"
+            android:strokeColor="#FFF7E8"
+            android:strokeLineCap="round"
+            android:strokeWidth="112" />
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M848,676 C780,478 674,366 566,344"
+            android:strokeColor="#FFF7E8"
+            android:strokeLineCap="round"
+            android:strokeWidth="112" />
+        <path
+            android:fillColor="#E8503A"
+            android:pathData="M458,286 A54,54 0,1 0,566 286 A54,54 0,1 0,458 286 Z" />
+    </group>
+</vector>

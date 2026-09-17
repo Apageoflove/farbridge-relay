@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PhoneMirror" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/pm_primary</item>
+        <item name="colorPrimaryDark">@color/pm_primary_dark</item>
+        <item name="colorAccent">@color/pm_primary</item>
+        <item name="android:windowBackground">@color/pm_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/pm_background</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+</resources>

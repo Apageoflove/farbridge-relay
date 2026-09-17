@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 安卓状态栏要求单色透明小图标，这里保留远桥的桥形轮廓。 -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M176,676 C244,478 350,366 458,344"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="112" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:pathData="M848,676 C780,478 674,366 566,344"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round"
+        android:strokeWidth="112" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M458,286 A54,54 0,1 0,566 286 A54,54 0,1 0,458 286 Z" />
+</vector>

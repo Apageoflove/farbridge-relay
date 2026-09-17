@@ -1,0 +1,29 @@
+# Isolated Phone Mirror API; no public bind and no shared project volumes.
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: server/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - /data/phone-mirror/deploy/secrets.env
+    ports:
+      - "172.17.0.1:8084:8084"
+    volumes:
+      - /data/phone-mirror/data:/data/phone-mirror/data
+      - /data/phone-mirror/logs:/data/phone-mirror/logs
+      - /data/phone-mirror/backups:/data/phone-mirror/backups
+      - /data/phone-mirror/releases:/data/phone-mirror/releases:ro
+      - /data/phone-mirror/.cache:/data/phone-mirror/.cache
+      - /data/phone-mirror/deploy/secrets.env:/run/secrets/phone-mirror.env:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8084/healthz', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

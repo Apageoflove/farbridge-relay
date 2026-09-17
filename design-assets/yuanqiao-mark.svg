@@ -1,0 +1,6 @@
+<!-- 远桥品牌母版：双向通信弧线形成桥梁，中央信号点表示消息正在通过。 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="远桥">
+  <path d="M176 676 C244 478 350 366 458 344" fill="none" stroke="#FFF7E8" stroke-width="112" stroke-linecap="round"/>
+  <path d="M848 676 C780 478 674 366 566 344" fill="none" stroke="#FFF7E8" stroke-width="112" stroke-linecap="round"/>
+  <circle cx="512" cy="286" r="54" fill="#E8503A"/>
+</svg>

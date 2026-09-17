@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 深色模式保持与浅色模式一致的信息层级和可读对比度。 -->
+<resources>
+    <color name="pm_background">#0F1720</color>
+    <color name="pm_surface">#17212B</color>
+    <color name="pm_primary">#39C6B5</color>
+    <color name="pm_primary_dark">#0F766E</color>
+    <color name="pm_primary_soft">#173D3B</color>
+    <color name="pm_on_primary">#071B19</color>
+    <color name="pm_text_primary">#F2F6F8</color>
+    <color name="pm_text_secondary">#B9C4CB</color>
+    <color name="pm_border">#34434E</color>
+    <color name="pm_field_background">#111A22</color>
+    <color name="pm_success">#63D5A9</color>
+    <color name="pm_warning">#F5B85C</color>
+</resources>

@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "WebWorker"],
+    "types": ["vite/client"],
+    "skipLibCheck": true
+  },
+  "include": ["src/service-worker.ts", "src/service-worker-policy.ts"],
+  "exclude": []
+}

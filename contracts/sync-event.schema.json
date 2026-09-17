@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://phone-mirror.invalid/contracts/v1.json",
+  "title": "Phone Mirror Protocol v1",
+  "oneOf": [
+    {"$ref": "#/$defs/syncBatch"},
+    {"$ref": "#/$defs/snapshot"},
+    {"$ref": "#/$defs/heartbeat"},
+    {"$ref": "#/$defs/ack"}
+  ],
+  "$defs": {
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["device_id", "event_id", "entity_type", "action", "source_id", "entity_version", "occurred_at", "payload"],
+      "properties": {
+        "device_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "event_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "entity_type": {"enum": ["SMS", "CALL"]},
+        "action": {"enum": ["UPSERT", "DELETE"]},
+        "source_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "entity_version": {"type": "integer", "minimum": 0},
+        "occurred_at": {"type": "integer", "minimum": 0},
+        "payload": {"type": ["object", "null"]}
+      },
+      "allOf": [
+        {"if": {"properties": {"action": {"const": "DELETE"}}}, "then": {"properties": {"payload": {"type": "null"}}}},
+        {"if": {"properties": {"action": {"const": "UPSERT"}}}, "then": {"properties": {"payload": {"type": "object", "minProperties": 1}}}}
+      ]
+    },
+    "syncBatch": {"type": "object", "additionalProperties": false, "required": ["events"], "properties": {"events": {"type": "array", "minItems": 1, "maxItems": 200, "items": {"$ref": "#/$defs/event"}}}},
+    "entity": {"type": "object", "additionalProperties": false, "required": ["source_id", "entity_version", "occurred_at", "payload"], "properties": {"source_id": {"type": "string"}, "entity_version": {"type": "integer", "minimum": 0}, "occurred_at": {"type": "integer", "minimum": 0}, "payload": {"type": "object"}}},
+    "snapshot": {"type": "object", "additionalProperties": false, "required": ["device_id", "snapshot_id", "generated_at", "complete", "messages", "calls"], "properties": {"device_id": {"type": "string"}, "snapshot_id": {"type": "string"}, "generated_at": {"type": "integer", "minimum": 0}, "complete": {"const": true}, "messages": {"type": "array", "items": {"$ref": "#/$defs/entity"}}, "calls": {"type": "array", "items": {"$ref": "#/$defs/entity"}}}},
+    "heartbeat": {"type": "object", "additionalProperties": false, "required": ["device_id", "timestamp", "battery_percent", "charging", "network_type", "pending_event_count", "sms_permission_ok", "call_log_permission_ok", "app_version"], "properties": {"device_id": {"type": "string"}, "timestamp": {"type": "integer", "minimum": 0}, "battery_percent": {"type": "integer", "minimum": 0, "maximum": 100}, "charging": {"type": "boolean"}, "network_type": {"type": "string"}, "pending_event_count": {"type": "integer", "minimum": 0}, "sms_permission_ok": {"type": "boolean"}, "call_log_permission_ok": {"type": "boolean"}, "app_version": {"type": "string"}}},
+    "ack": {"type": "object", "additionalProperties": false, "required": ["acked_event_ids"], "properties": {"acked_event_ids": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}}}
+  }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">远桥</string>
+    <string name="notification_channel_name">远桥后台同步</string>
+    <string name="notification_running_title">远桥正在运行</string>
+</resources>

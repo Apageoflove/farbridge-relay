@@ -1,0 +1,17 @@
+{
+  "name": "远桥",
+  "short_name": "远桥",
+  "description": "安卓到 iPhone 的私人通信桥",
+  "lang": "zh-CN",
+  "start_url": "/messages",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F3F6FA",
+  "theme_color": "#163A70",
+  "icons": [
+    { "src": "/icons/phone-mirror-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/phone-mirror-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icons/relay-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

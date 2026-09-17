@@ -1,0 +1,1 @@
+{"events":[{"device_id":"android-device-01","event_id":"fixture-event-1","entity_type":"SMS","action":"UPSERT","source_id":"sms-42","entity_version":1,"occurred_at":1700000000,"payload":{"sender":"masked-fixture","body":"fixture body","received_at":1700000000,"otp":"123456"}}]}

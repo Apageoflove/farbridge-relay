@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Phone Mirror 的轻量配色；只使用系统与 AppCompat 能力，不增加 UI 依赖。 -->
+<resources>
+    <color name="ic_launcher_background">#163A70</color>
+    <color name="pm_background">#F3F6F8</color>
+    <color name="pm_surface">#FFFFFFFF</color>
+    <color name="pm_primary">#0F766E</color>
+    <color name="pm_primary_dark">#115E59</color>
+    <color name="pm_primary_soft">#DDF4F0</color>
+    <color name="pm_on_primary">#FFFFFFFF</color>
+    <color name="pm_text_primary">#17212B</color>
+    <color name="pm_text_secondary">#5A6875</color>
+    <color name="pm_border">#D7E0E5</color>
+    <color name="pm_field_background">#F8FAFB</color>
+    <color name="pm_success">#13795B</color>
+    <color name="pm_warning">#A15C00</color>
+</resources>
