@@ -83,6 +83,24 @@
 - [ ] **Step 3: Verify remote tree, README, asset absence, and secret scan.**
 - [ ] **Step 4: Re-run local checks and read-only server health/container/hash checks.**
 
+### Task 5: Rename public identity and separate language documents
+
+**Files:**
+- Modify: `README.md`
+- Create: `README.en.md`
+- Modify: GitHub repository name and description through the repository API.
+
+**Interfaces:**
+- `README.md` is the Simplified Chinese landing page and links to `README.en.md`.
+- `README.en.md` is the English landing page and links back to `README.md`.
+- Both documents use the stable public slug `farbridge-relay` after the repository rename.
+
+- [ ] **Step 1: Rename the GitHub repository from `yuanqiao-relay` to `farbridge-relay` and confirm the default branch remains `main`.**
+- [ ] **Step 2: Replace the mixed-language README with a Chinese landing page whose language switcher links directly to `README.en.md`.**
+- [ ] **Step 3: Add the English landing page with a direct return link to `README.md`.**
+- [ ] **Step 4: Render the iPhone preview at `width="360"` using a plain image element, without a table, border, or Android preview.**
+- [ ] **Step 5: Validate both language files, relative links, remote release links, and no-secret/no-old-slug scans.**
+
 ### Self-review checklist
 
 - [ ] The Android screenshot and caption are absent from README and the remote tree.
