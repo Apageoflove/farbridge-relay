@@ -1,6 +1,6 @@
-# 远桥 · Yuanqiao Relay：发布与安全边界
+# 远桥 · FarBridge Relay：发布与安全边界 / Release Safety Boundary
 
-这份文档说明公开源码、使用者自己的运行环境和现有线上实例之间的边界。GitHub 仓库只是脱敏源码与文档，不是任何人的生产密钥备份。
+这份文档说明公开源码、使用者自己的运行环境和现有线上实例之间的边界。GitHub 仓库只是脱敏源码与文档，不是任何人的生产密钥备份。This document separates the public source, an operator's environment, and the live deployment; GitHub is not a production secret backup.
 
 ## 脱敏发布规则
 
@@ -8,6 +8,8 @@
 - README 中的 `example.invalid`、`<placeholder>` 和示例设备 ID 只能作为模板，部署前必须由使用者替换。
 - 截图和示意图只展示抽象界面，不展示真实地址、短信正文、验证码、手机号、二维码或个人资料。
 - `deploy/secrets.env`、`deploy/initial-credentials.txt`、数据库和日志只存在于使用者自己的受控目录，并保持 Git 忽略。
+
+The English product ID is **FarBridge Relay**; `yuanqiao-relay` is only the stable GitHub slug. iOS is distributed as Safari/PWA instructions, not an IPA.
 
 ## 使用者自行生成密钥
 
