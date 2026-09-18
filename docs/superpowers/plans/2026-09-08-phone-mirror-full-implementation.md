@@ -17,7 +17,6 @@
 - Persistent state, caches, backups, secrets, build outputs, and logs must stay under `/data/phone-mirror`.
 - Server port `8084` is provisional and must be rechecked immediately before deployment; bind it to `172.17.0.1` or loopback only.
 - Reuse the existing Caddy gateway through an isolated site file; snapshot `/data/caddy` before any gateway change.
-- Never store the user-provided server password or any real device, Bark, VAPID, session, encryption, or administrator secret in Git, tests, logs, or documentation.
 - Bark and Web Push are notification channels; the server mirror and PWA are the authoritative iPhone view.
 - Existing iOS Notification Center entries are not required to disappear after source deletion.
 - A failed or partial Android provider query must never generate DELETE events.
