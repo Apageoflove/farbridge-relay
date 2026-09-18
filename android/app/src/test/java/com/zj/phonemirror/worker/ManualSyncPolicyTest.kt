@@ -21,7 +21,7 @@ class ManualSyncPolicyTest {
 
     /** 认证和网络失败只能提示笼统的中文原因，不能把异常正文暴露到界面。 */
     @Test
-    fun failureMessagesAreActionableAndSanitized() {
+    fun failureMessagesAreActionableAndMasked() {
         assertEquals(
             "服务器拒绝认证，请检查设备 ID 和设备密钥",
             ManualSyncPolicy.statusMessage(

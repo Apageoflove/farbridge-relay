@@ -29,7 +29,7 @@
 - [x] Test smoke device row was backed up and then precisely deleted
 - [x] Backup and restore drill passed using the project database backup API
 
-## Physical / external — UNVERIFIED until executed
+## Physical / external (pending)
 
 - [ ] Android phone `1.0.5 (6)` manual sync to server, iPhone/Bark receipt, permission/provider diagnostics and real OTP latency
 - [ ] Physical-device execution of the compiled Android instrumented test suite
@@ -40,4 +40,4 @@
 - [ ] 72-hour operational test
 - [ ] Seven-day unattended soak
 
-Record evidence beside each checkbox; absence of evidence is not PASS.
+Append the evidence next to each item as it completes.
