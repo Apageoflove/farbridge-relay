@@ -47,11 +47,11 @@ iPhone 不提供 IPA，也不需要侧载：用 Safari 打开自己的 HTTPS 地
 
 详细资料：
 
-- [架构](docs/ARCHITECTURE.md)
-- [Android 权限](docs/ANDROID_PERMISSIONS.md)
-- [iPhone 设置](docs/IPHONE_SETUP.md)
+- [架构](docs/ARCHITECTURE.zh-CN.md)
+- [Android 权限](docs/ANDROID_PERMISSIONS.zh-CN.md)
+- [iPhone 设置](docs/IPHONE_SETUP.zh-CN.md)
 - [从零部署与密钥操作手册](docs/OPERATOR_GUIDE.zh-CN.md)
-- [验收清单](docs/ACCEPTANCE.md)
+- [验收清单](docs/ACCEPTANCE.zh-CN.md)
 
 ## 本地构建
 
