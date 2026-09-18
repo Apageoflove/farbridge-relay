@@ -50,3 +50,7 @@ Read [Architecture](docs/ARCHITECTURE.md), [Android permissions](docs/ANDROID_PE
 ## Build locally
 
 Clone https://github.com/Apageoflove/farbridge-relay.git, enter the android directory, then run gradle testDebugUnitTest and gradle assembleRelease. No Gradle Wrapper is bundled; use a Gradle release compatible with Android Gradle Plugin 8.9.1.
+
+## License
+
+Released under the MIT License. See [LICENSE](LICENSE).

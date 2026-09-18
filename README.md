@@ -56,3 +56,7 @@ iPhone 不提供 IPA，也不需要侧载：用 Safari 打开自己的 HTTPS 地
 ## 本地构建
 
 克隆 https://github.com/Apageoflove/farbridge-relay.git 后，进入 android 目录，执行 gradle testDebugUnitTest 和 gradle assembleRelease。本仓库不携带 Gradle Wrapper；请使用与 Android Gradle Plugin 8.9.1 兼容的 Gradle。
+
+## 许可证
+
+本项目以 MIT 许可证开源，详见 [LICENSE](LICENSE)。
