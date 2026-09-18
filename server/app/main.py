@@ -422,17 +422,17 @@ def create_app(settings: Settings | None = None, releases_root: Path | None = No
         with SessionLocal() as db:
             row = db.scalar(select(Device).order_by(Device.last_seen.desc()).limit(1))
             if row is None:
-                return {"status": "UNKNOWN", "status_reason": "尚未收到一加心跳", "name": "OnePlus Home", "last_seen_at": None, "battery_percent": None, "charging": None, "network_type": None, "sms_permission_ok": False, "call_log_permission_ok": False, "pending_event_count": 0, "sync_error_count": 0, "app_version": ""}
+                return {"status": "UNKNOWN", "status_reason": "尚未收到安卓手机心跳", "name": "安卓手机", "last_seen_at": None, "battery_percent": None, "charging": None, "network_type": None, "sms_permission_ok": False, "call_log_permission_ok": False, "pending_event_count": 0, "sync_error_count": 0, "app_version": ""}
             age = max(0, now - row.last_seen)
             if age > settings.offline_minutes * 60:
                 status, reason = "OFFLINE", f"超过 {settings.offline_minutes} 分钟未收到心跳"
             elif age > settings.degraded_minutes * 60:
                 status, reason = "DEGRADED", f"超过 {settings.degraded_minutes} 分钟未收到心跳"
             elif not row.sms_permission_ok or not row.call_log_permission_ok or row.status != "ONLINE":
-                status, reason = "DEGRADED", "一加权限或默认短信角色异常"
+                status, reason = "DEGRADED", "安卓手机权限或默认短信角色异常"
             else:
                 status, reason = "ONLINE", "链路心跳正常"
-            return {"status": status, "status_reason": reason, "name": "OnePlus Home", "last_seen_at": row.last_seen, "battery_percent": row.battery_percent, "charging": row.charging, "network_type": row.network_type, "sms_permission_ok": row.sms_permission_ok, "call_log_permission_ok": row.call_log_permission_ok, "pending_event_count": row.pending_event_count, "sync_error_count": 0, "app_version": row.app_version}
+            return {"status": status, "status_reason": reason, "name": "安卓手机", "last_seen_at": row.last_seen, "battery_percent": row.battery_percent, "charging": row.charging, "network_type": row.network_type, "sms_permission_ok": row.sms_permission_ok, "call_log_permission_ok": row.call_log_permission_ok, "pending_event_count": row.pending_event_count, "sync_error_count": 0, "app_version": row.app_version}
 
     @app.get("/api/v1/settings/notifications", dependencies=[Depends(browser_session)])
     def notification_settings():
@@ -517,7 +517,7 @@ def create_app(settings: Settings | None = None, releases_root: Path | None = No
 
     @app.get("/downloads/phone-mirror.apk", include_in_schema=False)
     def download_android_apk():
-        """Serve the audited OnePlus installer from the project release directory."""
+        """Serve the audited Android installer from the project release directory."""
         apk = releases_root / "phone-mirror.apk"
         if not apk.is_file():
             raise HTTPException(404, "Android installer is not published")

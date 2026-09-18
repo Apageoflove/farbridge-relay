@@ -165,7 +165,7 @@ onBeforeUnmount(() => {
     <p class="sr-live" :class="{ 'visible-live': refreshFeedbackVisible }" aria-live="polite">{{ announcement }}</p>
     <div v-if="loading" class="loading-state" role="status"><span></span>正在读取服务器镜像…</div>
     <EmptyState v-else-if="error && messages.length === 0" title="无法读取消息" :detail="`${error}。确认服务器可用后重试。`" action-label="重试" @action="refresh" />
-    <EmptyState v-else-if="messages.length === 0" title="还没有镜像消息" detail="新短信到达一加并完成同步后会出现在这里。" action-label="重新读取" @action="refresh" />
+    <EmptyState v-else-if="messages.length === 0" title="还没有镜像消息" detail="新短信到达安卓手机并完成同步后会出现在这里。" action-label="重新读取" @action="refresh" />
     <template v-else>
       <p v-if="error" class="error-banner" role="status">{{ error }}</p>
       <p class="retention-note"><strong>服务器最多保留30天</strong><span>；已收藏短信除非你主动删除，否则永久保留。</span></p>
@@ -175,7 +175,7 @@ onBeforeUnmount(() => {
     <div v-if="pendingDelete" class="confirm-scrim" role="presentation" @click.self="pendingDelete = null">
       <section class="confirm-dialog" role="dialog" aria-modal="true" aria-label="确认删除短信">
         <h2>仅删除服务器记录？</h2>
-        <p>一加手机里的原短信不会被删除。</p>
+        <p>安卓手机里的原短信不会被删除。</p>
         <div class="confirm-actions"><button class="secondary-button" type="button" @click="pendingDelete = null">取消</button><button class="primary-button danger-button" type="button" aria-label="确认仅删除服务器记录" @click="confirmDelete">确认删除</button></div>
       </section>
     </div>

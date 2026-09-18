@@ -304,7 +304,7 @@ describe('CallsView', () => {
 
 describe('DeviceView', () => {
   it('离线状态显示原因和排查动作', async () => {
-    const load = vi.fn().mockResolvedValue({ status: 'OFFLINE', status_reason: '超过 120 分钟未收到心跳', name: 'OnePlus Home', last_seen_at: 1700000000, battery_percent: 20, charging: false, network_type: 'unknown', sms_permission_ok: true, call_log_permission_ok: true, pending_event_count: 3, sync_error_count: 1, app_version: '1.0.0' })
+    const load = vi.fn().mockResolvedValue({ status: 'OFFLINE', status_reason: '超过 120 分钟未收到心跳', name: '安卓手机', last_seen_at: 1700000000, battery_percent: 20, charging: false, network_type: 'unknown', sms_permission_ok: true, call_log_permission_ok: true, pending_event_count: 3, sync_error_count: 1, app_version: '1.0.0' })
     render(DeviceView, { props: { load } })
     expect(await screen.findByText('OFFLINE')).toBeInTheDocument()
     expect(screen.getByText('超过 120 分钟未收到心跳')).toBeInTheDocument()
@@ -312,10 +312,10 @@ describe('DeviceView', () => {
   })
 
   it('尚未收到真实心跳时不把未知值误报为未充电或权限异常', async () => {
-    const load = vi.fn().mockResolvedValue({ status: 'UNKNOWN', status_reason: '尚未收到一加心跳', name: 'OnePlus Home', last_seen_at: null, battery_percent: null, charging: null, network_type: null, sms_permission_ok: false, call_log_permission_ok: false, pending_event_count: 0, sync_error_count: 0, app_version: '' })
+    const load = vi.fn().mockResolvedValue({ status: 'UNKNOWN', status_reason: '尚未收到安卓手机心跳', name: '安卓手机', last_seen_at: null, battery_percent: null, charging: null, network_type: null, sms_permission_ok: false, call_log_permission_ok: false, pending_event_count: 0, sync_error_count: 0, app_version: '' })
     render(DeviceView, { props: { load } })
     expect(await screen.findByText('UNKNOWN')).toBeInTheDocument()
-    expect(screen.getByText('尚未收到一加心跳')).toBeInTheDocument()
+    expect(screen.getByText('尚未收到安卓手机心跳')).toBeInTheDocument()
     expect(screen.queryByText('未充电')).not.toBeInTheDocument()
     expect(screen.queryByText('异常')).not.toBeInTheDocument()
     expect(screen.getAllByText('待同步')).toHaveLength(2)

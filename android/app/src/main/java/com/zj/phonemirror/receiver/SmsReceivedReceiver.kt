@@ -12,7 +12,7 @@ class SmsReceivedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == "android.provider.Telephony.SMS_RECEIVED") {
             WorkerScheduler.enqueueSms(context)
-            // 一加系统可能在广播之后才提交 Provider；独立尾随任务保证最终读到已落盘短信。
+            // 部分系统可能在广播之后才提交 Provider；独立尾随任务保证最终读到已落盘短信。
             WorkerScheduler.enqueueSmsAfterProviderCommit(context)
         }
     }

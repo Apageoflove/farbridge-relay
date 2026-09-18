@@ -1,4 +1,4 @@
-// 用 remoteMessaging 前台服务维持一加设备上的 Provider 观察器和同步调度。
+// 用 remoteMessaging 前台服务维持安卓设备上的 Provider 观察器和同步调度。
 package com.zj.phonemirror.service
 
 import android.app.NotificationChannel
@@ -29,7 +29,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 
-/** 显示低打扰常驻通知，降低 ColorOS/一加冻结进程导致漏实时事件的概率。 */
+/** 显示低打扰常驻通知，降低厂商系统冻结进程导致漏实时事件的概率。 */
 class RelayForegroundService : Service() {
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val diagnostics by lazy { RelayDiagnosticsStore(applicationContext) }

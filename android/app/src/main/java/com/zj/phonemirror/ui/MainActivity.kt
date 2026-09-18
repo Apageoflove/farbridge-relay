@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /** 将状态栏和导航栏尺寸叠加到设计间距，适配一加等定制系统。 */
+    /** 将状态栏和导航栏尺寸叠加到设计间距，适配各厂商定制系统。 */
     private fun applySafeArea(scroll: ScrollView) {
         ViewCompat.setOnApplyWindowInsetsListener(scroll) { view, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity() {
         addView(primaryButton("保存配置并启动") { saveConfig() }, topMarginParams(dp(18)))
     }
 
-    /** 第二步把一加的受限设置入口直接写在页面内，减少来回猜测。 */
+    /** 第二步把受限设置入口直接写在页面内，减少来回猜测。 */
     private fun buildPermissionCard() = card().apply {
         addView(sectionHeader("2", "允许系统权限", "读取短信和通话记录后才能完成同步"))
         permissionStatusText = statusPanel()

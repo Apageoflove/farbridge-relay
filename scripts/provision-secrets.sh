@@ -46,7 +46,7 @@ Phone Mirror 初始凭据（生成时间: $(date -Is)）
 PWA 登录用户名: admin
 PWA 登录密码:   $ADMIN_PASS
 设备 ID:        android-device-01
-设备密钥(粘贴到一加 App): $DEV
+设备密钥(粘贴到安卓 App): $DEV
 
 说明:
 - 本文件权限 600，且已 git-ignore，仅存在于服务器项目目录内。

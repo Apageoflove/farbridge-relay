@@ -1,4 +1,4 @@
-// 描述服务器汇总的一加设备健康状态和通知配置公开字段。
+// 描述服务器汇总的安卓设备健康状态和通知配置公开字段。
 export type DeviceStatusName = 'ONLINE' | 'DEGRADED' | 'OFFLINE' | 'UNKNOWN'
 
 export interface DeviceHealth {

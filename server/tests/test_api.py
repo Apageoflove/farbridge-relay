@@ -21,7 +21,7 @@ def signed_headers(body: bytes, path: str, nonce: str | None = None):
 
 
 def test_android_apk_download_is_fixed_and_never_spa_fallback(test_settings, tmp_path):
-    """The OnePlus installer must be a real APK with download-safe headers."""
+    """The Android installer must be a real APK with download-safe headers."""
     releases = tmp_path / "releases"
     releases.mkdir()
     apk = releases / "phone-mirror.apk"
@@ -90,7 +90,7 @@ def test_pwa_session_device_and_notification_contract(test_settings):
         assert restored.json()["csrf_token"] != original_csrf
 
         device = client.get("/api/v1/device").json()
-        assert device["name"] == "OnePlus Home"
+        assert device["name"] == "安卓手机"
         assert device["status"] == "ONLINE"
         assert device["last_seen_at"] == heartbeat["timestamp"]
         assert device["pending_event_count"] == 2

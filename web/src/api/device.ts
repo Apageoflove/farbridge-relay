@@ -2,7 +2,7 @@
 import { apiFetch } from './http'
 import type { DeviceHealth, NotificationSettings } from '../types/device'
 
-/** 获取一加设备当前健康汇总。 */
+/** 获取安卓设备当前健康汇总。 */
 export function getDevice(): Promise<DeviceHealth> {
   return apiFetch<DeviceHealth>('/device')
 }

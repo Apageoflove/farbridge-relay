@@ -31,7 +31,7 @@
 
 ## Physical / external — UNVERIFIED until executed
 
-- [ ] OnePlus `1.0.5 (6)` manual sync to server, iPhone/Bark receipt, permission/provider diagnostics and real OTP latency
+- [ ] Android phone `1.0.5 (6)` manual sync to server, iPhone/Bark receipt, permission/provider diagnostics and real OTP latency
 - [ ] Physical-device execution of the compiled Android instrumented test suite
 - [ ] Default SMS role eligibility, opt-in, role loss and fallback
 - [ ] Offline queue, ACK-loss replay, source deletions, process death and reboot

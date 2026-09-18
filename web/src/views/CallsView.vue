@@ -112,7 +112,7 @@ onBeforeUnmount(() => { sse?.stop(); document.removeEventListener('visibilitycha
     <p class="sr-live visible-live" aria-live="polite">{{ announcement }}</p>
     <div v-if="loading" class="loading-state" role="status"><span></span>正在读取通话镜像…</div>
     <EmptyState v-else-if="error && calls.length === 0" title="无法读取通话记录" :detail="`${error}。确认服务器可用后重试。`" action-label="重试" @action="refresh" />
-    <EmptyState v-else-if="calls.length === 0" title="还没有通话记录" detail="一加产生通话记录并完成同步后会出现在这里。" action-label="重新读取" @action="refresh(true)" />
+    <EmptyState v-else-if="calls.length === 0" title="还没有通话记录" detail="安卓手机产生通话记录并完成同步后会出现在这里。" action-label="重新读取" @action="refresh(true)" />
     <template v-else>
       <p v-if="error" class="error-banner" role="status">{{ error }}</p>
       <div class="log-list"><CallCard v-for="call in calls" :key="call.id" :call="call" @copy="copyNumber" @request-delete="pendingDelete = call" /></div>

@@ -3,7 +3,7 @@ package com.zj.phonemirror.worker
 
 import androidx.work.ExistingWorkPolicy
 
-/** 避免一加系统先发广播、后写入 SMS Provider 时读取到旧快照。 */
+/** 避免部分系统先发广播、后写入 SMS Provider 时读取到旧快照。 */
 object SmsProviderCommitPolicy {
     /** 兼顾系统短信库提交时间与验证码到达实时性的短延迟。 */
     const val delayMillis = 2_500L

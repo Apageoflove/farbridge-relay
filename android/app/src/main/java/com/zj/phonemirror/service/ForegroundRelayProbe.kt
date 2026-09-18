@@ -7,7 +7,7 @@ import kotlinx.coroutines.CancellationException
 /**
  * 每轮完整读取两类 Provider，并在任一来源实际变化时仅安排一次上传。
  *
- * 一加等 OEM 可能延迟或抑制 ContentObserver；此单元由前台服务主动调用，
+ * 部分 OEM 可能延迟或抑制 ContentObserver；此单元由前台服务主动调用，
  * 因而不把实时性建立在系统广播是否送达的前提上。
  */
 class ForegroundRelayProbe(

@@ -45,7 +45,7 @@ class PhoneMirrorApplication : Application() {
                 contentResolver.registerContentObserver(CallLog.Calls.CONTENT_URI, true, observer)
                 callObserver = observer
             } catch (_: SecurityException) {
-                // 某些一加系统在授权前拒绝注册；返回应用后会再次尝试。
+                // 某些定制系统在授权前拒绝注册；返回应用后会再次尝试。
             }
         }
     }

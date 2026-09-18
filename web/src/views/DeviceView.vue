@@ -1,4 +1,4 @@
-<!-- 用中继链路和可操作原因呈现一加设备健康状态。 -->
+<!-- 用中继链路和可操作原因呈现安卓设备健康状态。 -->
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { getDevice } from '../api/device'
@@ -36,7 +36,7 @@ function timeLabel(timestamp: number | null | undefined): string {
   return new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(timestamp * 1000))
 }
 
-const reason = computed(() => device.value?.status_reason || (device.value?.status === 'ONLINE' ? '链路心跳正常' : '请检查一加网络和后台权限'))
+const reason = computed(() => device.value?.status_reason || (device.value?.status === 'ONLINE' ? '链路心跳正常' : '请检查安卓手机网络和后台权限'))
 const awaitingHeartbeat = computed(() => device.value?.status === 'UNKNOWN')
 const sse = typeof EventSource === 'undefined' ? null : createSseController(onMirrorChange, refresh)
 const visibilityHandler = () => sse?.onVisibilityChange()
