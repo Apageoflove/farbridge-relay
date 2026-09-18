@@ -1,4 +1,4 @@
-// 将前台中继最近探测、上传和脱敏错误状态保存为本地可读诊断。
+// 将前台中继最近的探测、上传和错误状态保存为本地可读的诊断记录。
 package com.zj.phonemirror.service
 
 import android.content.Context

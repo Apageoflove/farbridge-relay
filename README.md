@@ -18,7 +18,7 @@
 
 <img src="docs/assets/iphone-ui-preview.png" alt="FarBridge Relay iPhone Safari PWA 消息列表预览" width="360">
 
-<sub>界面预览：最新优先、短信展开、收藏、置顶与刷新。没有设备外框或四角表格边框。</sub>
+<sub>消息列表预览：最新优先，短信可展开，支持收藏、置顶与手动刷新。</sub>
 
 ## 功能
 

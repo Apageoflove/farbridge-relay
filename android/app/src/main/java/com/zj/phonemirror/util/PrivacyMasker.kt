@@ -1,9 +1,9 @@
-// 为诊断界面生成不含正文、OTP 和完整号码的脱敏摘要。
+// 为诊断界面生成不含正文、OTP 和完整号码的摘要。
 package com.zj.phonemirror.util
 
 import com.zj.phonemirror.parser.VerificationCodeParser
 
-/** 集中执行 UI/日志脱敏，避免调用方自行拼接敏感字段。 */
+/** 统一打码 UI 和日志里的敏感字段，避免调用方自行拼接。 */
 object PrivacyMasker {
     /** 保留长号码前三后四位，短号码只保留首尾。 */
     fun maskAddress(value: String?): String {

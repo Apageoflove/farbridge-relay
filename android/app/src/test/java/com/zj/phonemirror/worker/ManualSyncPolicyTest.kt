@@ -19,7 +19,7 @@ class ManualSyncPolicyTest {
         )
     }
 
-    /** 认证和网络失败只能显示脱敏中文原因，不能把异常正文暴露到界面。 */
+    /** 认证和网络失败只能提示笼统的中文原因，不能把异常正文暴露到界面。 */
     @Test
     fun failureMessagesAreActionableAndSanitized() {
         assertEquals(

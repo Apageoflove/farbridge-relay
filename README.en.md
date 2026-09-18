@@ -18,7 +18,7 @@ FarBridge Relay is a self-hosted Android → relay server → iPhone Safari/PWA 
 
 <img src="docs/assets/iphone-ui-preview.png" alt="FarBridge Relay iPhone Safari PWA message list preview" width="360">
 
-<sub>UI preview: newest-first records, expandable SMS, favorites, pinning, and refresh. No device frame or four-corner table border.</sub>
+<sub>Message list preview: newest first, expandable SMS, favorites, pinning, and manual refresh.</sub>
 
 ## Features
 
